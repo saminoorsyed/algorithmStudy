@@ -1,21 +1,28 @@
-
-def divide_search(arr: list, target: int, start: int = 0, end : int = -1,) -> int:
-    '''
-    Search for an element in a list of sorted numbers using Divide and Conquer Technique. If the element is found return the index of the key, else return -1.
-
-    Function definition: search(numList, key)
-    sample input: numList = [1,3,4,5,6,7,8,9]; key=9
-    output: 7
-    '''
-    if end == -1:
-        end = len(arr)
-
-    if start < end:
+def binary_search(arr, start, end, target):
+    if start <= end:
         middle = (start + end) // 2
-        divide_search(arr, target, start, middle)
-        divide_search(arr, target, middle+1, end)
-    if arr[start] == target:
-        return start
-    else:
-        return -1
+        print(start,middle, end)
+        if arr[middle] == target:
+            # found
+            return middle
 
+        if arr[middle] > target:
+            return binary_search (arr, start, middle-1, target)
+
+        if arr[middle] < target:
+            return binary_search(arr, middle+1, end, target)
+    # not found
+    return -1  
+
+
+def search(arr, key):
+    return binary_search(arr, 0, len(arr)-1, key)
+
+
+if __name__ == '__main__':
+  a = [1,3,4,5,6,7,8,9]
+  result = search(a, 9)
+  print(result)
+  arr = [1,2,12,22,96,105,600]
+  result = search(arr, 12)
+  print(result)
