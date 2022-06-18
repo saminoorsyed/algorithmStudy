@@ -17,12 +17,3 @@ def binary_search(arr, start, end, target):
 
 def search(arr, key):
     return binary_search(arr, 0, len(arr)-1, key)
-
-
-if __name__ == '__main__':
-  a = [1,3,4,5,6,7,8,9]
-  result = search(a, 9)
-  print(result)
-  arr = [1,2,12,22,96,105,600]
-  result = search(arr, 12)
-  print(result)
