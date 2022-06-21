@@ -49,6 +49,7 @@ def top_down_make_min_change(change: int, denominations: list, memo: list = [])-
         # this step prevents us from recalculating previously calculated calls is performed at O(1) time
         result = memo[change]
         return memo[change]
+    result = change +1
     for i in range(len(denominations)-1):
         # recursively call the function on the new change amount
         if denominations[i] <= change:
