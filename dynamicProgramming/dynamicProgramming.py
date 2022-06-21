@@ -32,7 +32,6 @@ def make_min_change(change: int, denominations: list) -> list:
     
     return result
 
-# Top down make min change implementations
 
 def top_down_make_min_change(change: int, denominations: list, memo: list = [])-> int:
     """
@@ -40,33 +39,33 @@ def top_down_make_min_change(change: int, denominations: list, memo: list = [])-
 
     in this case, we can discontinue the recalculation of combinations of coins that have already been solved for by keeping track of what we have already solve through memoization
     """
-    memo = [None]*(change+1)
-    result = change + 1
+    # If memo is an empty list, create a list of length change so that a value can be stored at each index. The index represents the value of the remaining change and the value stored is the solution for that change 
+    if not memo:
+        memo = [None]*(change+1)
+    # if there is no change left to be made, the recursive call returns 0 [base case]
     if change == 0: 
         return 0
     if memo[change]:
-        print ("it worked!")
+        # this step prevents us from recalculating previously calculated calls is performed at O(1) time
         result = memo[change]
         return memo[change]
     for i in range(len(denominations)-1):
+        # recursively call the function on the new change amount
         if denominations[i] <= change:
-            if not memo[change]:
-                result = min(make_min_change(change - denominations[i], denominations)+1, result)
-                memo[change] = result
-            else:
-                result = memo[change]
-    print(memo)
+            result = min(top_down_make_min_change(change - denominations[i], denominations, memo)+1)
+            memo[change] = result
+        else:
+            result = -1
     return result
 
 
 
 if __name__ == '__main__':
-    change = 35
-    denominations = [10,7,5,1]
+    change = 104
+    denominations = [5,8,12,15]
 
     print(make_min_change(change, denominations))
 
-    change = 157
-    denominations = [11,7,5,1]
-
+    change = 44
+    denominations = [10]
     print(top_down_make_min_change(change, denominations))
