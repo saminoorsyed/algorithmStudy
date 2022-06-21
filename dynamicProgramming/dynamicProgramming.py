@@ -22,7 +22,6 @@ def make_min_change(change: int, denominations: list) -> list:
     param:
     return
     """
-    result = None
     if change == 0: return 0
     # result tracks the number of coins used
     result = change+1
@@ -33,8 +32,41 @@ def make_min_change(change: int, denominations: list) -> list:
     
     return result
 
+# Top down make min change implementations
+
+def top_down_make_min_change(change: int, denominations: list, memo: list = [])-> int:
+    """
+    using a top down approach, we can minimize the amount of work that needs to be done.
+
+    in this case, we can discontinue the recalculation of combinations of coins that have already been solved for by keeping track of what we have already solve through memoization
+    """
+    memo = [None]*(change+1)
+    result = change + 1
+    if change == 0: 
+        return 0
+    if memo[change]:
+        print ("it worked!")
+        result = memo[change]
+        return memo[change]
+    for i in range(len(denominations)-1):
+        if denominations[i] <= change:
+            if not memo[change]:
+                result = min(make_min_change(change - denominations[i], denominations)+1, result)
+                memo[change] = result
+            else:
+                result = memo[change]
+    print(memo)
+    return result
+
+
+
 if __name__ == '__main__':
     change = 35
     denominations = [10,7,5,1]
 
     print(make_min_change(change, denominations))
+
+    change = 157
+    denominations = [11,7,5,1]
+
+    print(top_down_make_min_change(change, denominations))
