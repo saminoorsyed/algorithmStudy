@@ -53,20 +53,36 @@ def top_down_make_min_change(change: int, denominations: list, memo: list = [])-
     for i in range(len(denominations)-1):
         # recursively call the function on the new change amount
         if denominations[i] <= change:
-            result = min(top_down_make_min_change(change - denominations[i], denominations, memo)+1)
+            result = min(top_down_make_min_change(change - denominations[i], denominations, memo)+1, result)
             memo[change] = result
         else:
             result = -1
     return result
 
+def bottom_up_make_min_change(change: int, denominations: list)->int:
+    """
+    bottom up approach for make change function solves the base case of 0 change first, then iterates up to the change amount
+    """
+    change_solutions= [change+1]*(change+1)
+
+    for amount in range(1, change + 1):
+        for coin in denominations:
+            if (coin <= change and (amount - coin))>=0:
+                change_solutions[amount] = min(change_solutions[amount], change_solutions[amount - coin]+1)
+    if change_solutions[change] > change:
+        result = -1
+    else:
+        result = change_solutions[change]
+    return result
+    
 
 
 if __name__ == '__main__':
-    change = 104
+    change = 30
     denominations = [5,8,12,15]
 
     print(make_min_change(change, denominations))
 
-    change = 44
-    denominations = [10]
     print(top_down_make_min_change(change, denominations))
+
+    print(bottom_up_make_min_change(change, denominations))
