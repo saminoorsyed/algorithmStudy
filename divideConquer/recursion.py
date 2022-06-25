@@ -82,21 +82,30 @@ def kth_optimized(arr1: list, arr2: list, k: int) -> int:
     if len(arr2)> len(arr1):
         arr1, arr2 = arr2, arr1
     # initialize. Mark1 on the first array will be placed such that half of the k elements are on the first array. the rest of the elements should be contained in the second array.
-    mark1 = (k if k <= len(arr1) else k-(k-len(arr1)))-2
-    print("mark1", arr1[mark1])
-    mark2 = 0 if k <= len(arr1) else k-mark1-2
-    print("mark2",arr2[mark2])
+    mark1 = k if k < len(arr1) else k-(k-len(arr1))-1
+    print(mark1, arr1[mark1])
+    mark2 = 0 if k < len(arr1) else k-mark1-2
+    print(mark2)
     # if there are fewer elements in the array than k, the kth element does not exist in either array
-    if len(arr1)+len(arr2) < k+2:
+    if len(arr1)+len(arr2) < k:
         return None
     
+    if len(arr1)+len(arr2) == k:
+        return max(arr1[-1], arr2[-1])
+    
+    if len(arr1)+len(arr2) == k+1:
+        if arr1[mark1] <= arr2[mark2+1] or arr2[mark2] <= arr1[mark1+1]:
+            return max(arr1[mark1], arr2[mark2])
+        else:
+            return max(arr1[mark1-1], arr2[mark2+1])
 
     while arr1[mark1] > arr2[mark2+1] or arr2[mark2] > arr1[mark1+1]:
         #adjust the placements of markers to include fewer elements on the array which contains the largest value (if that value is greater than the value stored in the other array's marker+1 value)
         print(mark1, mark2)
         if arr1[mark1]> arr2[mark2+1]:
-            mark1 = (mark1)//2-1
+            mark1 = (mark1-1)//2
             mark2 = k-mark1-2
+            while len(arr2)
         elif arr2[mark2]> arr1[mark1+1]:
             mark2 = (mark2-1)//2
             mark1 = k-mark2-2
@@ -107,14 +116,14 @@ def kth_optimized(arr1: list, arr2: list, k: int) -> int:
 
 if __name__ == '__main__':
     
-    # arr1 = [-5,1,2,2,3,5,6]
-    # arr2= [-7,3,4,5,6,7]
-    # k= 5
+    arr1 = [-5,1,2,2,3,5,6]
+    arr2= [-7,3,4,5,6,7]
+    k= 5
 
     # print(kthElement(arr1, arr2, 5))
 
-    arr1 = [-5,1,2,2,3,5,6]
-    arr2= [-7,3,4,5,6,7]
+    arr1 = [-5,1,2,2]
+    arr2= [-7,3,4]
     k= 4
 
     print(kth_optimized(arr1, arr2, 5))
