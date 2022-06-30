@@ -95,8 +95,21 @@ def longest_sub_seq(list1, list2):
     
 def bottom_up_lss(list1, list2):
     """
-    implement a dynamically programmed bottom up solution to the longest subsequence problem
+    Implement a dynamically programmed bottom up solution to the longest subsequence problem
     """
+
+    # create a two dimensional array
+    m = len(list1)
+    n = len(list2)
+    columns = [0]*m
+    subsol = [columns] * n
+    for row in n:
+        for column in m:
+            if m == 0 and n == 
+    return subsol
+    # check if the solution to the sub array is already stored in the 2d array
+    # solve for the next coordinates of the 2d array
+    # return the solution stored at two_d_array[i][j]
 
 if __name__ == '__main__':
     # change = 30
@@ -108,6 +121,8 @@ if __name__ == '__main__':
 
     # print(bottom_up_make_min_change(change, denominations))
 
-    list1 = [1]
-    list2 = [1]
+    list1 = [1,2,3,4]
+    list2 = [1,2,3,4]
     print(longest_sub_seq(list1, list2))
+
+    print(bottom_up_lss(list1,list2))
