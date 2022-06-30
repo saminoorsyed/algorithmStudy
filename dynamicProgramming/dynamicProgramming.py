@@ -41,7 +41,7 @@ def top_down_make_min_change(change: int, denominations: list, memo: list = [])-
     """
     # If memo is an empty list, create a list of length change so that a value can be stored at each index. The index represents the value of the remaining change and the value stored is the solution for that change 
     if not memo:
-        memo = [None]*(change+1)
+        memo = [0]*(change+1)
     # if there is no change left to be made, the recursive call returns 0 [base case]
     if change == 0: 
         return 0
@@ -54,9 +54,8 @@ def top_down_make_min_change(change: int, denominations: list, memo: list = [])-
         # recursively call the function on the new change amount
         if denominations[i] <= change:
             result = min(top_down_make_min_change(change - denominations[i], denominations, memo)+1, result)
-            memo[change] = result
-        else:
-            result = -1
+            if result < memo[change]:
+                memo[change] = result
     return result
 
 def bottom_up_make_min_change(change: int, denominations: list)->int:
@@ -75,14 +74,40 @@ def bottom_up_make_min_change(change: int, denominations: list)->int:
         result = change_solutions[change]
     return result
     
+# naive longest subsequence problem time complexity O(2^n)
+def longest_sub_seq(list1, list2):
+    """
+    find the longest subsequence through dynamic top-down approach
+    """
+    #base casea
+    i = len(list1)
+    j = len(list2)
 
+    if i == 0 or j == 0:
+        return 0
+    if list1[0] == list2[0]:
+        count = max(longest_sub_seq(list1[1:], list2)+1, longest_sub_seq(list1, list2[1:])+1)
+        return count
+    else:
+        count = max(longest_sub_seq(list1[1:], list2), longest_sub_seq(list1, list2[1:]))
+        return count
+
+    
+def bottom_up_lss(list1, list2):
+    """
+    implement a dynamically programmed bottom up solution to the longest subsequence problem
+    """
 
 if __name__ == '__main__':
-    change = 30
-    denominations = [5,8,12,15]
+    # change = 30
+    # denominations = [5,8,12,15]
 
-    print(make_min_change(change, denominations))
+    # print(make_min_change(change, denominations))
 
-    print(top_down_make_min_change(change, denominations))
+    # print(top_down_make_min_change(change, denominations))
 
-    print(bottom_up_make_min_change(change, denominations))
+    # print(bottom_up_make_min_change(change, denominations))
+
+    list1 = [1]
+    list2 = [1]
+    print(longest_sub_seq(list1, list2))
