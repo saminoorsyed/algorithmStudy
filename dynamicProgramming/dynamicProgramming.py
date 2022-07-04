@@ -92,21 +92,26 @@ def longest_sub_seq(list1, list2):
         count = max(longest_sub_seq(list1[1:], list2), longest_sub_seq(list1, list2[1:]))
         return count
 
-    
+# bottom up approach of longest subsequence problem time complexity is O(m+n) where m and n are the lengths of m and n
 def bottom_up_lss(list1, list2):
     """
     Implement a dynamically programmed bottom up solution to the longest subsequence problem
     """
 
-    # create a two dimensional array
+    # create a two dimensional array to represent all of the solutions
     m = len(list1)
     n = len(list2)
-    columns = [0]*m
-    subsol = [columns] * n
+    columns = [0]*m+1
+    subsol = [columns] * n+1
     for row in n:
         for column in m:
-            if m == 0 and n == 
-    return subsol
+            if m == 0 and n == 0:
+                subsol[row][column] = 0
+            elif list1[row] == list2[column]:
+                subsol[row][column] = subsol[row-1][column-1] +1
+            else:
+                subsol[row][column] = max(subsol[row-1][column], subsol[row][column-1])
+    return subsol[n][m]
     # check if the solution to the sub array is already stored in the 2d array
     # solve for the next coordinates of the 2d array
     # return the solution stored at two_d_array[i][j]
