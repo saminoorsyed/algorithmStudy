@@ -112,9 +112,7 @@ def bottom_up_lss(list1, list2):
             else:
                 subsol[row][column] = max(subsol[row-1][column], subsol[row][column-1])
     return subsol[n][m]
-    # check if the solution to the sub array is already stored in the 2d array
-    # solve for the next coordinates of the 2d array
-    # return the solution stored at two_d_array[i][j]
+    
 
 if __name__ == '__main__':
     # change = 30
