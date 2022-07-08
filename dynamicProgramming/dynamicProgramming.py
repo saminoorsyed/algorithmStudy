@@ -124,8 +124,8 @@ if __name__ == '__main__':
 
     # print(bottom_up_make_min_change(change, denominations))
 
-    list1 = [1,2,3,4]
+    list1 = [1,6,3,4,5]
     list2 = [1,2,3,4]
     print(longest_sub_seq(list1, list2))
 
-    print(bottom_up_lss(list1,list2))
+    # print(bottom_up_lss(list1,list2))
