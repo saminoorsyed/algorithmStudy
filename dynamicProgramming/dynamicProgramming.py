@@ -112,20 +112,23 @@ def bottom_up_lss(list1, list2):
             else:
                 subsol[row][column] = max(subsol[row-1][column], subsol[row][column-1])
     return subsol[n][m]
-    
+
+def knapsack_unbounded(weights:list, values:list, capacity: int)-> int:
+    """
+    Computes the highest value solution for a nap sack of a specified capacity given the weights and values of the items that would fit into it. Outputs the maximum value
+    """
+
+    cache = [0]* (capacity+1)
+
+    for x in range(1,capacity+1):
+        for i in range (len(weights)):
+            wi = weights[i]
+            if wi <= x:
+                cache[x] = max(cache[x], cache[x-wi] + values[i])
+    return cache[len(weights)]
+
 
 if __name__ == '__main__':
-    # change = 30
-    # denominations = [5,8,12,15]
-
-    # print(make_min_change(change, denominations))
-
-    # print(top_down_make_min_change(change, denominations))
-
-    # print(bottom_up_make_min_change(change, denominations))
-
-    list1 = [1,6,3,4,5]
-    list2 = [1,2,3,4]
-    print(longest_sub_seq(list1, list2))
-
-    # print(bottom_up_lss(list1,list2))
+    weights = [1,2,3,4]
+    values = [10,20,5,15]
+    print(knapsack_unbounded(weights,values,10))

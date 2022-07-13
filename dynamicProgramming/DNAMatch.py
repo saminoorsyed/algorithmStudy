@@ -40,8 +40,11 @@ def dna_match_bottomup(DNA1: list, DNA2: list) -> int:
     return cache[len(DNA2)][len(DNA1)]
 
 
-# if __name__ == '__main__':
-#     list1 = [1,6,3,4,5]
-#     list2 = [1,2,3,4]
-#     print(dna_match_topdown(list1, list2))
-#     print(dna_match_bottomup(list1,list2))
+if __name__ == '__main__':
+
+    list1 = [1,6,3,4,5]
+    list2 = [1,2,3,4]
+    print(dna_match_topdown(list1, list2))
+    print(dna_match_bottomup(list1,list2))
+
+    # print(bottom_up_lss(list1,list2))
