@@ -127,8 +127,28 @@ def knapsack_unbounded(weights:list, values:list, capacity: int)-> int:
                 cache[x] = max(cache[x], cache[x-wi] + values[i])
     return cache[len(weights)]
 
+def knapsack_01(weights:list, values:list, capacity:int, cache:list = [])-> int:
+    """
+    computes the optimal solution for a nap sakc of specified capacity given that each item can only be chosen once
+    """
+    if capacity == 0 or len(weights) == 0:
+        return 0
+    cache = [[0]*(len(weights))] * (capacity+1)
+    if capacity == 0 or len(weights) == 0:
+        return 0
+    for x in range(capacity+1):
+        for i in range(len(weights)):
+            wi = weights[i]
+            if capacity == 0:
+                cache[x][i] = 0
+            elif wi <= x:
+                cache[x][i]= max(cache[x-wi][i-1] + values[i], cache[x][i-1])
+    return cache[capacity][len(weights)-1]
+
+
 
 if __name__ == '__main__':
     weights = [1,2,3,4]
     values = [10,20,5,15]
     print(knapsack_unbounded(weights,values,10))
+    print(knapsack_01(weights,values,10))
