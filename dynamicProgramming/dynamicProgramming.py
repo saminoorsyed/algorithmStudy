@@ -133,13 +133,13 @@ def knapsack_01(weights:list, values:list, capacity:int, cache:list = [])-> int:
     """
     if capacity == 0 or len(weights) == 0:
         return 0
-    cache = [[0]*(len(weights))] * (capacity+1)
+    cache = [[0 for x in range(len(weights))] for x in range(capacity+1)]
     if capacity == 0 or len(weights) == 0:
         return 0
     for x in range(capacity+1):
         for i in range(len(weights)):
             wi = weights[i]
-            if capacity == 0:
+            if x == 0 or i ==0:
                 cache[x][i] = 0
             elif wi <= x:
                 cache[x][i]= max(cache[x-wi][i-1] + values[i], cache[x][i-1])
@@ -148,7 +148,7 @@ def knapsack_01(weights:list, values:list, capacity:int, cache:list = [])-> int:
 
 
 if __name__ == '__main__':
-    weights = [1,2,3,4]
-    values = [10,20,5,15]
+    weights = [4, 9, 3, 5, 7]
+    values = [10, 25, 13, 20, 8]
     print(knapsack_unbounded(weights,values,10))
     print(knapsack_01(weights,values,10))
