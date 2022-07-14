@@ -63,7 +63,7 @@ if __name__ == '__main__':
 
 def knapsack_unbounded(weights:list, values:list, capacity: int)-> int:
     """
-    Computes the highest value solution for a nap sack of a specified capacity given the weights and values of the items that would fit into it. Outputs the maximum value
+    Computes the highest value solution for a nap sack of a specified capacity and returns the weights of those items given the weights and values of the items that would fit into it. Outputs the maximum value
     """
 
     cache = [0]* (capacity+1)
@@ -77,7 +77,7 @@ def knapsack_unbounded(weights:list, values:list, capacity: int)-> int:
                     cache[x] = cache[x-wi] + values[i]
     items = []
     while capacity > 0:
-        items.append(items_used[capacity])
+        items.append(weights[items_used[capacity]])
         capacity = capacity- weights[items_used[capacity]]
 
     return items
@@ -85,5 +85,5 @@ def knapsack_unbounded(weights:list, values:list, capacity: int)-> int:
 if __name__ == '__main__':
     weights = [4, 9, 3, 5, 7]
     values = [10, 25, 13, 20, 8]
-    print(knapsack_unbounded(weights,values,10))
+    print(knapsack_unbounded(weights,values,20))
     print(makechange_bottomup([1,3,5],8))
