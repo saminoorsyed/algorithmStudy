@@ -41,6 +41,7 @@ def LCS_backtrack(list1: list, list2: list) -> list:
         elif cache[length2][length1] == cache[length2][length1-1]:
             length1 -=1
         else:
+            
             length2 -= 1
     solution.reverse()
     return solution
