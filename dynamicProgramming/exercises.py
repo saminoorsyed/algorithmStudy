@@ -64,25 +64,16 @@ def makechange_bottomup(coins, amount):
 
     min_count_table[0] = 0 # setting the base case
 
-    coins_used = [0 for coin in range(amount+1)]
-
     for i in range(1, amount+1):  # iterate through all possible amount values from base case
         for j in range(0, len(coins)): #find the number of coins needed for each coin denomination
             coin_val = coins[j]
             if(coin_val <= amount): # if denomination value is less than amount then we can use the coin
                 # replace min_count_table[i] with minumum value of coins possible
-                if (min_count_table[i] > min_count_table[i-coin_val]+1):
-                    coins_used[i] = coin_val
-                    min_count_table[i] = min_count_table[i-coin_val]+1
+                min_count_table[i] = min(min_count_table[i] , min_count_table[i-coin_val]+1)
 
-    result=[]
     # we have a valid count of coins if min_count_table[amount] is valid
     if min_count_table[amount] > amount: result = -1
-    else:
-        while amount>0:
-            result.append(coins_used[amount])
-            amount = amount - coins_used[amount]
-
+    else: result = min_count_table[amount]
     return  result
     
 # naive longest subsequence problem time complexity O(2^n)
@@ -163,4 +154,3 @@ if __name__ == '__main__':
     values = [10, 25, 13, 20, 8]
     print(knapsack_unbounded(weights,values,10))
     print(knapsack_01(weights,values,10))
-    print(makechange_bottomup([1,3,5],8))
