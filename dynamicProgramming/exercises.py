@@ -58,21 +58,32 @@ def top_down_make_min_change(change: int, denominations: list, memo: list = [])-
                 memo[change] = result
     return result
 
-def bottom_up_make_min_change(change: int, denominations: list)->int:
-    """
-    bottom up approach for make change function solves the base case of 0 change first, then iterates up to the change amount
-    """
-    change_solutions= [change+1]*(change+1)
+def makechange_bottomup(coins, amount):
 
-    for amount in range(1, change + 1):
-        for coin in denominations:
-            if (coin <= change and (amount - coin))>=0:
-                change_solutions[amount] = min(change_solutions[amount], change_solutions[amount - coin]+1)
-    if change_solutions[change] > change:
-        result = -1
+    min_count_table = [amount+1]*(amount+1) # setting array elements to some large value that is not possible answer
+
+    min_count_table[0] = 0 # setting the base case
+
+    coins_used = [0 for coin in range(amount+1)]
+
+    for i in range(1, amount+1):  # iterate through all possible amount values from base case
+        for j in range(0, len(coins)): #find the number of coins needed for each coin denomination
+            coin_val = coins[j]
+            if(coin_val <= amount): # if denomination value is less than amount then we can use the coin
+                # replace min_count_table[i] with minumum value of coins possible
+                if (min_count_table[i] > min_count_table[i-coin_val]+1):
+                    coins_used[i] = coin_val
+                    min_count_table[i] = min_count_table[i-coin_val]+1
+
+    result=[]
+    # we have a valid count of coins if min_count_table[amount] is valid
+    if min_count_table[amount] > amount: result = -1
     else:
-        result = change_solutions[change]
-    return result
+        while amount>0:
+            result.append(coins_used[amount])
+            amount = amount - coins_used[amount]
+
+    return  result
     
 # naive longest subsequence problem time complexity O(2^n)
 def longest_sub_seq(list1, list2):
@@ -152,3 +163,4 @@ if __name__ == '__main__':
     values = [10, 25, 13, 20, 8]
     print(knapsack_unbounded(weights,values,10))
     print(knapsack_01(weights,values,10))
+    print(makechange_bottomup([1,3,5],8))
