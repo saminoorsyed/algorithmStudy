@@ -57,9 +57,6 @@ def LCS_backtrack(list1: list, list2: list) -> list:
     solution.reverse()
     return solution
 
-if __name__ == '__main__':
-    list1 = [1,6,3,4,5]
-    list2 = [1,2,3,4]
 
 def knapsack_unbounded(weights:list, values:list, capacity: int)-> int:
     """
