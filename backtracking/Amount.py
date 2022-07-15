@@ -32,7 +32,3 @@ def amount(numbers: list, target:int, combos: list = [], final: list = [], combo
     final = [list(x) for x in final]
     return final
 
-if __name__ == '__main__':
-    a = [1,1,2,3,5]
-    target = 6
-    print(amount(a, target))
