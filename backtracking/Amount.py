@@ -10,6 +10,7 @@ def amount(numbers: list, target:int, combos: list = [], final: list = [], combo
     #if the target is met, append the values from the combo to the solution
     if sum == target:
         result = [numbers[x] for x in combos]
+        # do not repeat any values
         result.sort()
         if result not in final:
             final.append(result.copy())
@@ -32,3 +33,8 @@ def amount(numbers: list, target:int, combos: list = [], final: list = [], combo
     final = [list(x) for x in final]
     return final
 
+if __name__ == '__main__':
+
+    numbers = [11,1,3,2,6,1,5]
+    target = 8
+    print(amount(numbers,target))
