@@ -20,13 +20,13 @@ def max_independent_set(nums:list)-> list:
         if index == 0:
             cache[0] = max(nums[0], 0)
             solution[index]=[max(nums[0], 0)]
-        if index == 1:
+        elif index == 1:
             cache[1] = max(nums[0], nums[1])
             solution[index]=[max(nums[0], nums[1])]
         else:
             if nums[index] + cache[index-2] > cache[index-1]:
                 cache[index] = nums[index] + cache[index-2]
-                solution[index] = [nums[index]]+[solution[index-2]]
+                solution[index] = [nums[index]]+solution[index-2]
             else:
                 cache[index] = cache[index-1]
                 solution[index] = [solution[index-1]]
