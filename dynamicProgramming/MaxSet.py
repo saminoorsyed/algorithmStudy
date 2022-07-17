@@ -19,22 +19,23 @@ def max_independent_set(nums:list)-> list:
     for index in range(len(nums)):
         if index == 0:
             cache[0] = max(nums[0], 0)
-            solution[index]=[max(nums[0], 0)]
+            if nums[0] > 0:
+                solution[0]= [nums[0]]
         elif index == 1:
             cache[1] = max(nums[0], nums[1])
-            solution[index]=[max(nums[0], nums[1])]
+            if max(nums[0], nums[1]) > 0:
+                solution[1]= [max(nums[0], nums[1])]
         else:
             if nums[index] + cache[index-2] > cache[index-1]:
                 cache[index] = nums[index] + cache[index-2]
                 solution[index] = [nums[index]]+solution[index-2]
             else:
                 cache[index] = cache[index-1]
-                solution[index] = [solution[index-1]]
-    print (cache)
-    return solution
-
-
+                if solution[index-1] and solution[index-1][0] > 0:
+                    solution[index] = solution[index-1]
+    solution[-1].sort()
+    return solution[-1]
 
 if __name__ == "__main__":
-    test = [7,2,5,8,6] 
+    test =[-2,-2,-1,-1,0,0,1,1,2,-2,2,2,3,3,4,4,5,5]
     print(max_independent_set(test))
