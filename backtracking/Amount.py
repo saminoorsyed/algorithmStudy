@@ -5,7 +5,6 @@ def amount(listicle:list, target:int)->list:
 def amount_helper(listicle:list, target: int, permutation: list, solution:list)->list:
 
     if 0 == target:
-        permutation.sort()
         if permutation not in solution:
             solution.append(permutation.copy())
         return
@@ -15,10 +14,7 @@ def amount_helper(listicle:list, target: int, permutation: list, solution:list)-
         if listicle[i] <= target:
             remain = target - listicle[i]
             permutation.append(listicle[i])
-            lurst = listicle.copy()
-            for index in range(i+1): 
-                lurst.remove(listicle[index])
-            amount_helper(lurst, remain, permutation, solution)
+            amount_helper(listicle[1:], remain, permutation, solution)
             permutation.pop()
     return solution
 

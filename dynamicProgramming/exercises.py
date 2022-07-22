@@ -136,8 +136,6 @@ def knapsack_01(weights:list, values:list, capacity:int, cache:list = [])-> int:
     if capacity == 0 or len(weights) == 0:
         return 0
     cache = [[0 for x in range(len(weights))] for x in range(capacity+1)]
-    if capacity == 0 or len(weights) == 0:
-        return 0
     for x in range(capacity+1):
         for i in range(len(weights)):
             wi = weights[i]
