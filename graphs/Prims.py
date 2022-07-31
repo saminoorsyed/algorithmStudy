@@ -39,8 +39,8 @@ weight)
             result.append((closest_node[1], closest_node[2], G[closest_node[1]][closest_node[2]]))
             for i in range(len(G)):
                 if G[closest_node[2]][i] != 0:
-                    newedge = (G[closest_node[2]][i], closest_node[2],i)
-                    heapq.heappush(min_heap,newedge)
+                    new_edge = (G[closest_node[2]][i], closest_node[2],i)
+                    heapq.heappush(min_heap,new_edge)
     return result
 
 if __name__ == '__main__':
