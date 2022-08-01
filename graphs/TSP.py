@@ -32,56 +32,39 @@ def solve_tsp(G:list)->list:
         These indicate absence of an edge.  
         Name your function solve_tsp(G). Name your file TSP.py. 
     """
-    # use prims algorithm to construct an MST
-    min_span_tree = Prims(G)
-    print (min_span_tree)
-    # construct a pre-order traversal walk through the MST
-    # construct a hamiltonian circuit out of the pre-order traversal.
-    # return a list in order from start to finish of the nodes visited along the walk
+    # Initialize all vertices as unvisited.
+    unvisited = [i for i in range(1,len(G))]
+    loop_stop = len(unvisited)
+    # Select an arbitrary vertex, set it as the current vertex u. Mark u as visited.
+    steps = [0]
+    #start a loop that terminates only when it returns to the beginning
+    while len(steps) <= loop_stop:
+        # Set an arbitrarily large minimum
+        min = 999999999
+        # add a placeholder value
+        steps.append(0)
+        #since we're only checking these connections once, a heap will not improve time complexity
+        for vertex in range(len(G)):
+            weight = G[steps[-2]][vertex]
+            # check that the vertex has not been visited, that there is an edge and that the edge's weight is less than any other edge 
+            if weight > 0 and weight < min and vertex in unvisited:
+                min = weight
+                steps[-1] = vertex
+        check = steps[-1]
+        if steps[-1] == 0:
+            return False
+        unvisited.remove(steps[-1])
+    steps.append(0)
+    if 0 in steps[1:-1]:
+        return False
+    return steps
 
 
-def Prims(G:list)->list:
-    '''
-input format: a graph is input as an adjacency matrix of the following form:
-input = [ 
-  [0, 8, 5, 0, 0, 0, 0], 
-  [8, 0, 10, 2, 18, 0, 0], 
-  [5, 10, 0, 3, 0, 16, 0], 
-  [0, 2, 3, 0, 12, 30, 14], 
-  [0, 18, 0, 12, 0, 0, 4], 
-  [0, 0, 16, 30, 0, 0, 26], 
-  [0, 0, 0, 14, 4, 26, 0] 
-] 
+    # Find out the shortest edge connecting the current vertex u and an unvisited vertex v.
 
-The rows and columns of the matrix represent all the possible vertices.
-Values to the left of the diagonal represent the 
+    # Set v as the current vertex u. Mark v as visited.
 
-Output: a list of tuples, wherein each tuple represents an edge of the MST as (v1, v2, 
-weight) 
-'''
-    #store the number of vertices in the graph
-    vertices = len(G)
-    # create a list of tuples from the first row in G (distance, 0, new_node), exclude edges with a value of 0
-    min_heap = [(G[0][j],0,j) for j in range(len(G)) if G[0][j] != 0]
-    #create a heap structure from the list of tuples
-    heapq.heapify(min_heap)
-    # starting at node 0
-    visited = [0]
-    result = []
-    # start a loop to go through all of the nodes until each has been visited
-    while len(visited) < vertices:
-
-        # pop the edje with the shortest distance in the heap off
-        closest_node = heapq.heappop(min_heap)
-
-        if closest_node[2] not in visited:
-            visited.append(closest_node[2])
-            result.append((closest_node[1], closest_node[2], G[closest_node[1]][closest_node[2]]))
-            for i in range(len(G)):
-                if G[closest_node[2]][i] != 0:
-                    new_edge = (G[closest_node[2]][i], closest_node[2],i)
-                    heapq.heappush(min_heap,new_edge)
-    return result
+    # If all the vertices in the domain are visited, then terminate. Else, go to step 3.
 
 
 if __name__ == "__main__":
@@ -93,4 +76,4 @@ if __name__ == "__main__":
             [20, 2, 20, 0, 9], 
             [1, 20, 13, 9, 0], 
         ] 
-    solve_tsp(G)
+    print(solve_tsp(G))
