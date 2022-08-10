@@ -31,7 +31,7 @@ weight)
     # start a loop to go through all of the nodes until each has been visited
     while len(visited) < vertices:
 
-        # pop the edje with the shortest distance in the heap off
+        # pop the edge with the shortest distance in the heap off
         closest_node = heapq.heappop(min_heap)
 
         if closest_node[2] not in visited:
