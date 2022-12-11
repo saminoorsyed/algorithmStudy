@@ -1,3 +1,12 @@
+# INTUITION:
+# as we loop through the array, we must search for the remaining amount to add to the sum. 
+# Approach:
+# Instead of iterating through it a second time for each value needed to be checked, we can implement a dictionary to track the items 
+# we have already found using the elements as keys to store their index value allows us to use the dictionary as we might a hash map,
+# resulting in an added cost of O(1) time. looping through the list of numbers as it exists gives O(n) time complexity
+
+
+
 def twoSum(nums: list[int], target: int)-> list[int]:
     """
     creates a dictionary with key:value = element: index as it iterates through
