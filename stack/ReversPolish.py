@@ -25,7 +25,7 @@ def evalRPN(tokens: list[str]) -> int:
             if item == '+':
                 result += operand2
             elif item == '-':
-                result -= operand2
+                result -= operand2g
             elif item == '*':
                 result *= operand2
             elif item == '/':
