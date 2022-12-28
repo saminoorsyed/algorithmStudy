@@ -15,6 +15,9 @@ def evalRPN(tokens: list[str]) -> int:
     stack = []
     operators=('+','-','*','/')
     result = None
+    if len(tokens) == 1:
+        # type should match other outputs
+        return int(tokens[0])
     for item in tokens:
         if item in operators:
             operand2 = stack.pop()
@@ -26,7 +29,10 @@ def evalRPN(tokens: list[str]) -> int:
             elif item == '*':
                 result *= operand2
             elif item == '/':
-                result= result // operand2
+                result= int(result / operand2)
+                # result = result//operand2
+                # floor divided only rounds down, int will truncate numbers
+            
             stack.append(result)
 
         else:
@@ -49,3 +55,9 @@ if __name__ == "__main__":
     print(evalRPN(tokens))
 # Output: 22
 # Explanation: we're getting 12 because it needs to truncate toward 0, and when we divide 6 by -132 we should get 0 not -1,
+
+    tokens = ["18"]
+    print(type(evalRPN(tokens)))
+
+# Output: int
+# Explanation: edge case of a tokens only having a length of 1
