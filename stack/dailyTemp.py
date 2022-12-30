@@ -7,6 +7,7 @@ def dailyTemperatures(temperatures: list[int]) -> list[int]:
         if stack:
             finalIndex = index-1
             count = 1
+            # counting back if the temp is greater, this could result in n^2 time if the list is of ever increasing numbers
             while finalIndex>=0 and temp > stack[finalIndex]:
                 if final[finalIndex] == 0:
                     final[finalIndex] = count
