@@ -64,3 +64,49 @@ def kthElement(arr1: list, arr2: list, k: int) -> int:
         else:
             # reduce the size of the second array by half Return Def kthElement(arr1, arr2[:middle1+1], k)
             return kthElement(arr1, arr2[:middle2+1],k)
+
+def kth_optimized(arr1: list, arr2: list, k: int) -> int:
+    """
+    optimized version of the kth element algorithm. instead of dividing the entire array by 2, we adjust a marker on both the first and second arrays. the elements contained between arr1[0:l] and arr2[0:m] represent all and no more than k elements total.
+
+    we can move this marker back and forth using a binary search like method (divide and conquer) to end on a valid placement for k in which arr1[l]< arr2[m+1] and arr2[l] < arr1[l+1]
+
+    function returns the value of the kth element if the two sorted arrays, arr1 and arr2, are merged. this should be accomplished in log(k) time.
+
+    Param: arr1: list, arr2: list, k: int;
+    return: int
+    """
+
+    #make sure that the first array contains most of the points
+    if len(arr2)> len(arr1):
+        arr1, arr2 = arr2, arr1
+    # initialize. Mark1 on the first array will be placed such that half of the k elements are on the first array. the rest of the elements should be contained in the second array.
+    mark1 = k if k < len(arr1) else k-(k-len(arr1))-1
+    print(mark1, arr1[mark1])
+    mark2 = 0 if k < len(arr1) else k-mark1-2
+    print(mark2)
+    # if there are fewer elements in the array than k, the kth element does not exist in either array
+    if len(arr1)+len(arr2) < k:
+        return None
+    
+    if len(arr1)+len(arr2) == k:
+        return max(arr1[-1], arr2[-1])
+    
+    if len(arr1)+len(arr2) == k+1:
+        if arr1[mark1] <= arr2[mark2+1] or arr2[mark2] <= arr1[mark1+1]:
+            return max(arr1[mark1], arr2[mark2])
+        else:
+            return max(arr1[mark1-1], arr2[mark2+1])
+
+    while arr1[mark1] > arr2[mark2+1] or arr2[mark2] > arr1[mark1+1]:
+        #adjust the placements of markers to include fewer elements on the array which contains the largest value (if that value is greater than the value stored in the other array's marker+1 value)
+        print(mark1, mark2)
+        if arr1[mark1]> arr2[mark2+1]:
+            mark1 = (mark1-1)//2
+            mark2 = k-mark1-2
+            while len(arr2)
+        elif arr2[mark2]> arr1[mark1+1]:
+            mark2 = (mark2-1)//2
+            mark1 = k-mark2-2
+    
+    return max(arr1[mark1], arr2[mark2])
