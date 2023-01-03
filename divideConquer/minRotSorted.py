@@ -9,8 +9,7 @@
 # You must write an algorithm that runs in O(log n) time.
 
 # Approach:
-# Here we still use a binary search, but instead of looking for a target number, we are looking for a minimum, so we adjust our middle value to in a manner that moves it toward the smallest value.
-# once the number since left and right tend towards each other, at the point right is lower than left, we know that the left pointer is on the lowest value
+# Here we still use a binary search, but instead of looking for a target number, we are looking for a minimum, so we adjust our middle value to in a manner that moves it toward the smallest value. if the number middle number is greater than the right pointer, we know the smallest number lies to its right, make the left pointer point to 1 greater than the number (since it is higher than another value, it cannot be the min). otherwise, we know that the min lies to the left of the pointer and we can cinch the window to encompass only the numbers smaller <= the middle number. once the left and right pointers are pointing to the same value, we know that value is the lowest (since the left pointer)
 
 def findMin(nums: list[int]) -> int:
     left, right = 0, len(nums)-1
