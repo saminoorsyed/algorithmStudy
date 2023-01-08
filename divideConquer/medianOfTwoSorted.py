@@ -2,6 +2,54 @@
 
 # The overall run time complexity should be O(log (m+n)).
 
+def medianTwoSorted(nums1: list[int], nums2: list[int])-> float:
+    # make nums1 the longer list
+    if len(nums2)> len(nums1):
+        nums1, nums2 = nums2, nums1
+    totalLen = len(nums1)+len(nums2)
+    # if the total length is even, this gives the index of the higher number of the average 10//2 = 5, the 6th element of 10
+    # if the total length is odd, this gives the index of the median number 9//2 = 4, the 5th element of 9
+    median = totalLen//2
+    # start with both high and low on the first list
+    low = 0
+    high = len(nums1)-1
+
+    while low < high and len(nums2)>0:
+        middle = (low+high)//2
+        marker2 = median - middle
+        # if the middle number of nums1 is greater than the number ahead of the number in nums2, we need to move the marker down to include more numbers from nums2
+        if nums1[middle] > nums2[marker2]:
+            high = middle-1
+        else:
+            low = middle+1
+    
+    # return statement is different based on even length list or odd length list
+    # for odd length lists
+    if totalLen%2 ==1:
+        # all the numbers in the first list are greater than the median
+        if high<=0:
+            return nums2[median]
+        #all the numbers in the second list are greater than first list
+        if high >= median:
+            return nums1[median]
+        # numbers from both the first list and second list are below the median
+        else:
+            return max(nums1[middle-1], nums2[marker2-1])
+    # for even total lengths
+    else:
+        # all the numbers in the first list are greater than the median
+        if high<=0:
+            return (nums2[median]+nums2[median-1])/2
+        #all the numbers in the second list are greater than first list
+        if high >= median:
+            return (nums1[median]+ nums1[median-1])/2
+        # numbers from both the first list and second list are below the median
+        else:
+            higher = max(nums1[middle-1], nums2[marker2-1])
+            if higher == nums1[high-1]:
+                return(higher + max(nums1[high-2], nums2[marker2-1]))/2
+            else:
+                return (higher + max(nums1[high-1], nums2[marker2-2]))/2
 
 def findMedianSortedArrays(nums1: list[int], nums2: list[int]) -> float:
 
@@ -92,70 +140,81 @@ if __name__ == "__main__":
 
     nums1 = [1,2,3,4,5,6,7]
     nums2 = []
-
+    print("should return 4")
     print(findMedianSortedArrays(nums1,nums2))
-    # Output: 4
+    print(medianTwoSorted(nums1,nums2))
     # Example 2:
 
+    print("should return 4")
     nums1 = []
     nums2 = [1,2,3,4,5,6,7]
     print(findMedianSortedArrays(nums1,nums2))
+    print(medianTwoSorted(nums1,nums2))
 
-    # Output: 4
     # Explanation: same as the last test, checking that longer list is assigned list 1 in code
 
+    print("should return 5.5")
     nums1 = [8,9,10]
     nums2 = [1,2,3,4,5,6,7]
     print(findMedianSortedArrays(nums1,nums2))
+    print(medianTwoSorted(nums1,nums2))
 
     # Output: 5.5
     # Explanation: check that median is average of 6 and 7
-
+    print("should return 5.5")
     nums1 = [8,9,10]
     nums2 = [1,2,3]
     print(findMedianSortedArrays(nums1,nums2))
+    print(medianTwoSorted(nums1,nums2))
 
     # Output: 5.5
     # Explanation: median is the average of 3 and 8
-
+    print("should return 7")
     nums1 = [7,8,9,10]
     nums2 = [1,2,3]
     print(findMedianSortedArrays(nums1,nums2))
+    print(medianTwoSorted(nums1,nums2))
 
     # Output: 7
     # Explanation: median is in the second list, odd total length
-
+    print("should return 6.5")
     nums1 = [6,7,8,9,10]
     nums2 = [1,2,3]
     print(findMedianSortedArrays(nums1,nums2))
+    print(medianTwoSorted(nums1,nums2))
 
-    # Output: 6.5
     # Explanation: median is in the second list, even total length
 
+    print("should return 2.5")
     nums1 = [1,3]
     nums2 = [2,7]
     print(findMedianSortedArrays(nums1,nums2))
+    print(medianTwoSorted(nums1,nums2))
 
     # Output: 2.5
     # Explanation: median is in the second list, even total length
-
+    print("should return 0")
     nums1 = [0,0]
     nums2 = [0,0]
     print(findMedianSortedArrays(nums1,nums2))
+    print(medianTwoSorted(nums1,nums2))
 
     # Output:
     # Explanation: median is in the second list, even total length
-
+    print("should return 1")
     nums1 = [1,2]
     nums2 = [1,1]
     print(findMedianSortedArrays(nums1,nums2))
+    print(medianTwoSorted(nums1,nums2))
 
     # Output:
     # Explanation: median is in the second list, even total length
-    
+
+    print("should return 3")
     nums1 = [1,3,4]
     nums2 = [2,5]
     print(findMedianSortedArrays(nums1,nums2))
+    print(medianTwoSorted(nums1,nums2))
 
     # Output:
     # Explanation: median is in the second list, even total length
