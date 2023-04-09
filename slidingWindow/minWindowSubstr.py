@@ -44,11 +44,38 @@ def minWindow(s: str, t: str) -> str:
         right+=1
     return answer
         
-        
+def minWindows( s: str, t: str) -> str:
+    if s == t:
+        return s
+    tDict = {}
+    for char in t:
+        tDict[char] = tDict.get(char, 0)+1
+    left = 0
+    allIncluded = len(tDict)
+    # set shortest to the longest possible substring
+    shortest = len(s);
+    answer = ""
+    for right in range(len(s)):
+        rChar = s[right]
+        if rChar in tDict:
+            tDict[rChar]-=1
+            if tDict[rChar] == 0:
+                allIncluded-=1
+        while allIncluded <= 0 and left<=right:
+            if (right-left+1)< shortest+1:
+                shortest= right-left+1
+                answer = s[left:right+1]
+            lChar = s[left]
+            if lChar in tDict:
+                tDict[lChar]+=1
+                if tDict[lChar] == 1:
+                    allIncluded+=1
+            left+=1
+    return answer
 
 if __name__ == "__main__":
-    s = "ADOBECODEBANC"
-    t = "ABC"
-    print(minWindow(s,t))
+    s = "ABC"
+    t = "AC"
+    print(minWindows(s,t))
 # Output: "BANC"
 # Explanation: The minimum window substring "BANC" includes 'A', 'B', and 'C' from string t.
