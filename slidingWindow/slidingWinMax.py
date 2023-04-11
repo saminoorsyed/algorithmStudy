@@ -17,7 +17,7 @@
 
 from collections import deque
 
-def maxSlidingWindow(nums: list[int], k: int) -> list[int]:
+def maxSlidingWindows(nums: list[int], k: int) -> list[int]:
 
     # Initialize an empty monotonic queue
     queue = deque()
@@ -42,7 +42,26 @@ def maxSlidingWindow(nums: list[int], k: int) -> list[int]:
             final.append(queue[0][0])
     return final
 
+def maxSlidingWindow(nums: list[int], k: int) -> list[int]:
+        
+    # Initialize an empty monotonic queue
+    queue = deque()
+    final = []
+    left =0
+    # Iterate through the array
+    for right in range(len(nums)):
+        num = nums[right]
+        while queue and queue[-1]<num:
+            queue.pop()
+        queue.append(num)
+        
+        while right-left+1  > k:
+            queue.popleft()
+            left+=1
 
+        if right >= k-1:
+            final.append(queue[0])
+    return final
 # Example usage
 print(maxSlidingWindow([7,2,4], 2))
 
