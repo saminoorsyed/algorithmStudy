@@ -1,5 +1,6 @@
 # Given an integer array nums and an integer k, return the k most frequent elements. You may return the answer in any order.
 
+#APPROACH: 
 # create a dictionary b/c we are counting values in an array key:value = number: frequency
 # sort the keys of the dictionary using sorted function with key = lambda function to return frequencies
 # slice the list

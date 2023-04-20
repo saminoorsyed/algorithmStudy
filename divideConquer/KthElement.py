@@ -1,8 +1,5 @@
-# Sami Noor Syed
-# ​ONID: ​​934330738
-# Cs 325 Summer 2022
-# Assignment 2
-# due date: July 5th, 2022
+
+# July 5th, 2022
 
 
 def kthElement(arr1: list, arr2: list, k: int) -> int:
@@ -104,7 +101,6 @@ def kth_optimized(arr1: list, arr2: list, k: int) -> int:
         if arr1[mark1]> arr2[mark2+1]:
             mark1 = (mark1-1)//2
             mark2 = k-mark1-2
-            while len(arr2)
         elif arr2[mark2]> arr1[mark1+1]:
             mark2 = (mark2-1)//2
             mark1 = k-mark2-2
