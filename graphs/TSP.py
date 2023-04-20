@@ -1,7 +1,3 @@
-# Sami Noor Syed
-# CS-325 Algorithms
-# Assignment 7
-
 # import the heapq module so that Prims can run using a min-heap
 import heapq
 

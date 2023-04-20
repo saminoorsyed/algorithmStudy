@@ -1,3 +1,5 @@
+# finds all the permutations of a list with repetition that add up to the target value.
+
 def amount(listicle:list, target:int)->list:
     listicle.sort()
     return amount_helper(listicle, target, [],[])

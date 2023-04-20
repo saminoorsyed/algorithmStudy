@@ -1,4 +1,5 @@
 import copy
+# copy allows a deep copy of the puzzle so that a separate variable can be a assigned to an equivalent board
 
 def solve_puzzle(Board: list, Source: tuple, Destination: tuple)->list:
     """

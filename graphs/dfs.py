@@ -1,7 +1,5 @@
 # topological sort function that adds nodes to a graph in sorted order
-
 from collections import defaultdict
-
 
 class Graph:
     # Constructor
