@@ -2,7 +2,7 @@ def findMedianSortedArrays(nums1: list[int], nums2: list[int]) -> float:
         # Ensure nums1 is the smaller list
     if len(nums1) > len(nums2):
         nums1, nums2 = nums2, nums1
-    
+    # set search window to smaller list
     m, n = len(nums1), len(nums2)
     low, high = 0, m
     
