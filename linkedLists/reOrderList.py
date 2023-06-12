@@ -99,7 +99,7 @@ def printLinkedList(head):
 
 if __name__ == "__main__":
     # build list for re-ordering
-    list1 = [1,2,3,4,5]
+    list1 = [1,2]
     link1 = buildLinkedList(list1)
     # reorder list
     reorderList(link1)
