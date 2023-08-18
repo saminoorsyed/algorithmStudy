@@ -7,6 +7,7 @@
 import heapq
 
 class KthLargest:
+    # construct a min heap from el in list, only push largest numbers, el @ top of the heap is kth largest
     def __init__(self, k: int, nums: list[int]):
         self.heap = []
         self.k = k
@@ -17,7 +18,7 @@ class KthLargest:
                 if i > self.heap[0]:
                     heapq.heappushpop(self.heap,i)
         
-
+    # adds to the heap if a larger number is found and removes smallest
     def add(self, val: int) -> int:
         if len(self.heap) < self.k:
             heapq.heappush(self.heap,val)
