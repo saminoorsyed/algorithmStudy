@@ -22,6 +22,8 @@ Input: points = [[3,3],[5,-1],[-2,4]], k = 2
 Output: [[3,3],[-2,4]]
 Explanation: The answer [[-2,4],[3,3]] would also be accepted."""
 
+import heapq
+
 def k_closest_to_origin(points: list[list[int]], k:int)->list[list[int]]:
     # build a heap using distance as criteria
     heap = []
@@ -29,5 +31,5 @@ def k_closest_to_origin(points: list[list[int]], k:int)->list[list[int]]:
         distance = point[0]**2 + point[1]**2 #no need to square root the val
         #heap q uses the first el of tuple as a criteria for sorting
         heapq.heappush(heap, (distance, point))
-    return [heapq.heappop(heap)[1] for i in range(k)
+    return [heapq.heappop(heap)[1] for i in range(k)]
         
