@@ -1,6 +1,2 @@
-x = 10
-y = x
-
-print(y, x)
-x = 15
-print(y, x)
+s = "1234"
+print(s[-1:0])  # This will print the string "4"
