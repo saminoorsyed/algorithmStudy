@@ -11,76 +11,46 @@
 # The input represents a valid arithmetic expression in a reverse polish notation.
 # The answer and all the intermediate calculations can be represented in a 32-bit integer.
 
-def evalRPN(tokens: list[str]) -> int:
+def evalRPNs(expression):
     stack = []
-    operators=('+','-','*','/')
-    result = None
-    if len(tokens) == 1:
-        # type should match other outputs
-        return int(tokens[0])
-    for item in tokens:
-        if item in operators:
-            operand2 = stack.pop()
-            result = stack.pop()
-            if item == '+':
-                result += operand2
-            elif item == '-':
-                result -= operand2
-            elif item == '*':
-                result *= operand2
-            elif item == '/':
-                result= int(result / operand2)
-                # result = result//operand2
-                # floor divided only rounds down, int will truncate numbers
-            
-            stack.append(result)
+    operators = "+-*/"
 
+    for token in expression.split():
+        if token not in operators:
+            stack.append(float(token))
         else:
-            newInt = int(item)
-            stack.append(newInt)
-    return result
+            b = stack.pop()
+            a = stack.pop()
+            if token == "+":
+                stack.append(a + b)
+            elif token == "-":
+                stack.append(a - b)
+            elif token == "*":
+                stack.append(a * b)
+            elif token == "/":
+                # floor divide
+                stack.append(a // b)
 
-
-def evalRPNs( tokens: list[str]) -> int:
-    stack = []
-    operators=('+','-','*','/')
-    if len(tokens)==1:
-        return int(tokens[0])
-    for item in tokens:
-        if item in operators:
-            operand2 = stack.pop()
-            result = stack.pop()
-            if item == '+':
-                result += operand2
-            elif item == '-':
-                result -= operand2
-            elif item == "*":
-                result *= operand2
-            elif item == "/":
-                result == int(result/operand2)
-            stack.append(result)
-        else:
-            stack.append(int(item))
-    return result
+    return stack[0]
 
 
 if __name__ == "__main__":
-    tokens = ["2","1","+","3","*"]
+    tokens = "2 1 + 3 *"
     print(evalRPNs(tokens))
 
 # Output: 9
 # Explanation: ((2 + 1) * 3) = 9
-    tokens = ["4","13","5","/","+"]
+    tokens = "4 13 5 / +"
     print(evalRPNs(tokens))
 # Output: 6
 # Explanation: (4 + (13 / 5)) = 6
-    tokens = ["10","6","9","3","+","-11","*","/","*","17","+","5","+"]
+    tokens = "10 6 9 3 + -11 * / * 17 + 5 +"
     print(evalRPNs(tokens))
-# Output: 22
+# Output: 12
 # Explanation: we're getting 12 because it needs to truncate toward 0, and when we divide 6 by -132 we should get 0 not -1,
 
-    tokens = ["18"]
-    print(type(evalRPNs(tokens)))
+    tokens = "18"
+    print(evalRPNs(tokens))
 
 # Output: int
 # Explanation: edge case of a tokens only having a length of 1
