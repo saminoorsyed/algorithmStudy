@@ -21,7 +21,7 @@ The given node will always be the first node with val = 1. You must return the c
 def clone_graph(node):
 
     if not node: return node
-        
+    # track node in deque, track copy node in dictionary with val as key
     q, clones = deque([node]), {node.val: Node(node.val, [])}
     while q:
         cur = q.popleft() 
@@ -35,3 +35,4 @@ def clone_graph(node):
             cur_clone.neighbors.append(clones[ngbr.val])
             
     return clones[node.val]
+

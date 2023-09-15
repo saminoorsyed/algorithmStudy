@@ -41,7 +41,7 @@ def num_islands(grid: list[list[str]])-> int:
                     r = curr_land[0]
                     c = curr_land[1]
                     # if the coordinates are out of bounds
-                    if 0 >r or r >= len(grid) or 0>c or c >= len(grid[0]) or (r,c) in:
+                    if 0 >r or r >= len(grid) or 0>c or c >= len(grid[0]):
                         continue
                     land[curr_land] = grid[r][c]
                     # move to the next stack item if value is 0
