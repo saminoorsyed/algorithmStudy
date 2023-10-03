@@ -20,3 +20,4 @@ if __name__ == "__main__":
     candidates = [2,5,2,1,2]
     target = 5
     print(combinationSum2(candidates, target))
+    print(combinationSum2([11, 1, 3, 2, 6, 1, 5], 8))

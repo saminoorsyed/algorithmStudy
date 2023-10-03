@@ -30,4 +30,6 @@ def combo_sum_backtrack(nums: list, target:int, combos: list = [], final: list =
 
 # Basic tests for each function
 if __name__ == '__main__':
+    print(combo_sum_backtrack([2,5,2,1,2], 5))
     print(combo_sum_backtrack([11, 1, 3, 2, 6, 1, 5], 8))
+    

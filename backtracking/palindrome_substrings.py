@@ -9,7 +9,7 @@ def partition(s: str) -> list[list[str]]:
         
         for end in range(start +1, len(s)+1):
             if is_pal(s[start:end]):
-                path. append(s[start:end])
+                path.append(s[start:end])
                 backtrack(end, path)
                 path.pop()
 

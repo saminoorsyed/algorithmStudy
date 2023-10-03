@@ -1,5 +1,4 @@
 def permute(nums: list[int]) -> list[list[int]]:
-
     ans = []
 
     if len(nums) == 1:

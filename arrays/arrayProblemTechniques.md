@@ -13,7 +13,7 @@ List of Array problems grouped into similar problem solving techniques
         if index % mod is less than rows, you are zigging, otherwise you are zagging. 
         for the zig, just place it in the string represented by index % mod
         for the zag, place the letter in the string represented by the mod value - (index % mod)
-        concat all the lists and return
+        concatenate all the lists and return
     
 
 
