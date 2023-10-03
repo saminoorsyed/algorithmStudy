@@ -6,6 +6,17 @@ List of Array problems grouped into similar problem solving techniques
         iterate from the end of the list to the beginning, keeping track of the max value so far encountered
         store the current element, replace it with the max value and then compare the stored value with the max value
         replace value it the stored value is larger
+    2) zig zag: given a string, convert it to a ,matrix that represents a zig zag pattern of the letters
+        first create a list of strings, one string for each row
+        now you need two methods, one to place letters when zigging and one to place letters when zagging
+        define your mod as the number of rows + rows -2. rows is for the zig and rows-2 is for the zag.
+        if index % mod is less than rows, you are zigging, otherwise you are zagging. 
+        for the zig, just place it in the string represented by index % mod
+        for the zag, place the letter in the string represented by the mod value - (index % mod)
+        concat all the lists and return
+    
+
+
 
 # PassThrough twice
     1) Array product except Self:
@@ -55,6 +66,26 @@ List of Array problems grouped into similar problem solving techniques
     
     4) threeSum: find three numbers that add to 0 from a list
         first sort the items in the list then for each item in the list. then loop through each item. if an item > 0 there is no way for the numbers to sum to 0, so break and return an empty array. if the number is <= 0 then perform a two pointer with the number and a hi pointer as well as a low pointer if the sum is too low, increment the low number. if the sum is too high, decrement the high number if it's just right, append the indices, decrement hi and increment low. repeat until low = hi
+    
+    5) TopKFrequent: return the k most freq elements
+        build a dictionary using the value at each index as a key and the count of each value as the value
+        make a sorted list of the keys based on the values
+
+        built-ins:
+        --dictionary.keys(): returns a view object that should be cast to a list. the view object will change based on the dictionary in future calls. it points to the memory space of the dictionary. 
+        --list():  casting to a list creates a copy of a list or a new list from an iterable including strings, tuples sets etc.
+        --lambda functions: lambda arguments: expression
+        --sorted(list(dict.keys()), key = lambda x: dict[x], reverse = true)
+    
+    6) is Anagram: check if two strings are anagrams
+        first check if the lengths are equal (saves some time)
+        build a dictionary of the characters and their count for the first string
+        for each character in the second string, decrement the count in the dictionary
+        if any count is <0, break and return false.
+
+        built-ins:
+        --dict.get(char to look for, default value to return if no char in dict)
+
 
 
 # Building an answer using Modulo or floor division ore related arithmetic

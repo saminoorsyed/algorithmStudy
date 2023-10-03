@@ -18,4 +18,4 @@ def convert(s: str, numRows: int) -> str:
 if __name__ == "__main__":
     s = "PAYPALISHIRING"
     n = 3
-    print(convert(s, 3))
+    print(convert(s, 4))

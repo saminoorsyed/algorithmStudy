@@ -8,7 +8,7 @@ def isAnagram(s:str, t:str)-> bool:
     " utilizes built in sorted to compare s and t"
     return sorted(s)==sorted(t)
 
-# this solution also works, but in run time it takes much longer to complete. strangley, its big O time = O(n) rather than O(nlog(n)) like the above solution
+# this solution also works, but in run time it takes much longer to complete. strangely, its big O time = O(n) rather than O(nlog(n)) like the above solution
 def isAnagramLong(self, s: str, t: str) -> bool:
     if len(s) != len(t):
         return False
