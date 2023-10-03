@@ -17,7 +17,12 @@
 
 def productExceptSelf(nums: list[int]) -> list[int]:
     """
-    
+    array = [1,2,3,4]
+    answer = [1,1,1,1]
+    first pass: multiply by trailing index
+    answer = [1,1,2,6]
+    second pass: multipy by leading index
+    answer = [24,12,8, 6]
     """
     answer = [1]*len(nums)
     product = 1
@@ -26,6 +31,7 @@ def productExceptSelf(nums: list[int]) -> list[int]:
         answer[index] = answer[index-1]*nums[index-1]
     
     for index in reversed(range(len(nums)-1)):
+        # product builds from last product
         product *= nums[index+1]
         answer[index]*=product
     return answer
