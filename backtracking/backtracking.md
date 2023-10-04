@@ -54,4 +54,11 @@ creating many permutations from a list:
         so the first call to backtrack should call is pal on string[0:1] and backtrack on [1:string length]
         use the append to answer can check if palidrome then pop methodology
 
+        if we're not dealing with a palindrom, the list lengthens. if we are then we add to the result and check the rest of the list, setting a new start value to loop through the end.
+
+        as we bubble back up the recursion, the letters at the end start to group, creating checking longer and longer sets for palindromes
+
+        as we get groupings near the beginning, the letters at the end are re checked and added to the specific set that is appended to the answer group.
+        you can imagine it like a wave that can get bigger and bigger as it bubbles back up the recursive tree
+
         append, check and then pop
