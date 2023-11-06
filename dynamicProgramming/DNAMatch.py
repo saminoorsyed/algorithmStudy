@@ -3,26 +3,30 @@
 # Summer 2022
 # Assignment: 3
 # Due Date: July 11, 2022
-# Description: Implementation of top-down, bottom up and Naive approaches to the DNA matching problem
+# Description: Implementation of top-down, bottom up approaches to the DNA matching problem
+
+# question, given two strings of DNA, represented as strings of characters, return the length of the longest matching subsequence.
 
 def dna_match_topdown(DNA1: list, DNA2: list, memo: list = []) -> int:
-    
+
     columns = len(DNA1)
     rows = len(DNA2)
     if not memo:
-        memo = [ [-1]*columns for i in range(rows)]
-    
+        memo = [[-1]*columns for i in range(rows)]
+
     if columns == 0 or rows == 0:
         return 0
 
     if memo[rows-1][columns-1] != -1:
         return memo[rows-1][columns-1]
     elif DNA1[-1] == DNA2[-1]:
-        memo[rows-1][columns-1] = 1 + dna_match_topdown(DNA1[:-1], DNA2[:-1], memo)
+        memo[rows-1][columns-1] = 1 + \
+            dna_match_topdown(DNA1[:-1], DNA2[:-1], memo)
         return memo[rows-1][columns-1]
     else:
-         memo[rows-1][columns-1] = max(dna_match_topdown(DNA1, DNA2[:-1], memo), dna_match_topdown(DNA1[:-1], DNA2, memo))
-         return memo[rows-1][columns-1]
+        memo[rows-1][columns-1] = max(dna_match_topdown(DNA1, DNA2[:-1], memo),
+                                      dna_match_topdown(DNA1[:-1], DNA2, memo))
+        return memo[rows-1][columns-1]
 
 
 def dna_match_bottomup(DNA1: list, DNA2: list) -> int:
@@ -36,15 +40,16 @@ def dna_match_bottomup(DNA1: list, DNA2: list) -> int:
             elif DNA1[column-1] == DNA2[row-1]:
                 cache[row][column] = cache[row-1][column-1]+1
             else:
-                cache[row][column] = max(cache[row-1][column], cache[row][column-1])
+                cache[row][column] = max(
+                    cache[row-1][column], cache[row][column-1])
     return cache[len(DNA2)][len(DNA1)]
 
 
 if __name__ == '__main__':
 
-    list1 = [1,6,3,4,5]
-    list2 = [1,2,3,4]
+    list1 = [1, 6, 3, 4, 5, 12, 53, 18, 7]
+    list2 = [1, 2, 3, 4, 5, 53, 7, 18]
     print(dna_match_topdown(list1, list2))
-    print(dna_match_bottomup(list1,list2))
+    print(dna_match_bottomup(list1, list2))
 
     # print(bottom_up_lss(list1,list2))
