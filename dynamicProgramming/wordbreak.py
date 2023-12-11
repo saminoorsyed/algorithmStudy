@@ -42,7 +42,7 @@ def wordBreak(word: str, dictionary: list[str])-> list[str]:
                 continue
             # if the item from the dictionary matches the characters at the end of the character string
             # check whether the solution for the rest of the word exists, if so, add that sol to the current
-            checker = char_string[char_string_len-1:item_length-1:-1]
+            checker = char_string[char_string_len:item_length:-1]
             if item == char_string[char_string_len-1:item_length-1:-1]:
                 # add the solution if there the word is completed up to this point
                 for string_sol in dp[index - item_length]:
